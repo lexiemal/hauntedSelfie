@@ -24,6 +24,38 @@
         transition: opacity 0.1s;
         pointer-events: none;
       }
+      .hud {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        align-times: center;
+        gap: 10px;
+        font-family: sans-serif;
+        color: white;
+        font-size: 18px;
+      }
+      .rec-dot {
+        width: 12px; 
+        height: 12px;
+        background: red;
+        border-radius: 50%;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink{
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0; }
+      }
+
+      button {
+        background: rgba(255,255,255,0.2);
+        border: 1px solid white;
+        color: white;
+        font-size: 14px;
+        border-radius: 4px;
+        padding: 4px 8px;
+      }
     </style>
   </head>
   <body>
@@ -40,18 +72,35 @@
     <script>
       const video = document.getElementById('camera');
       const flash = document.getElementById('flash');
+      const counterEl = document.getElementById('counter');
+      const toggleBtn = document.getElementById('toggle');
+
+      let count = 0;
+      let isRunning = true;
+      let interval;
 
       // Access the front camera
       navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
         .then(stream => { video.srcObject = stream; })
         .catch(err => alert('Camera access needed to simulate selfie mode.'));
 
-      // Flash every 3 seconds
-      setInterval(() => {
+      //fake photo
+      function fakePhoto() {
+        if (!isRunning) return;
+        count++;
+        counterEl.textContent = count;
         flash.style.opacity = 1;
         setTimeout(() => flash.style.opacity = 0, 100);
-        // You could also play a fake shutter sound here
-      }, 3000);
+      };
+
+      //start interval
+      interval = setInterval(fakePhoto, 3000);
+
+      //button clicks
+      toggleBtn.addEventListener('click', () => {
+        isRunning = !isRunning;
+        toggleBtn.textContent = isRunning ? 'Stop' : 'Start';
+      });
     </script>
   </body>
 </html>
