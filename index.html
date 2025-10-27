@@ -75,6 +75,7 @@
       const counterEl = document.getElementById('counter');
       const toggleBtn = document.getElementById('toggle');
       const shutter = new Audio('shuttersound.m4a');
+      shutter.preload = 'auto';
 
       let count = 0;
       let isRunning = true;
@@ -92,7 +93,8 @@
         counterEl.textContent = count;
 
         shutter.currentTime = 0; //rewind
-        shutter.play(); //play sound
+        shutter.play().catch(() => {
+        }); //play sound do nothing if fails to load
         
         flash.style.opacity = 1;
         setTimeout(() => flash.style.opacity = 0, 100);
