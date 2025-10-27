@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>background: black;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>video {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>width: 100vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>object-fit: cover;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>transform: scaleX(-1); /* mirror selfie view */</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>.flash {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>top: 0; left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>width: 100vw;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>transition: opacity 0.1s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;video id="camera" autoplay playsinline&gt;&lt;/video&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="flash" id="flash"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const video = document.getElementById('camera');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const flash = document.getElementById('flash');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Access the front camera</p>
+<p class="p1"><span class="Apple-converted-space">      </span>navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.then(stream =&gt; { video.srcObject = stream; })</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.catch(err =&gt; alert('Camera access needed to simulate selfie mode.'));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Flash every 3 seconds</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>flash.style.opacity = 1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(() =&gt; flash.style.opacity = 0, 100);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// You could also play a fake shutter sound here</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}, 3000);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
